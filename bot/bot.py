@@ -81,7 +81,7 @@ async def process_start_command(message: Message):
     await message.answer(text=f'Привет, {name}! Бот запущен')
     await bot.send_message(chat_id=user_id, text='Бот запущен')
     
-    logger.add('../bot/debugs/debug.log', format='{time} {level} {message}', level='DEBUG', rotation='10 minutes')
+    logger.add('../bot/debugs/debug.log', format='{time} {level} {message}', level='DEBUG', rotation='10:00')
 
     time.sleep(5)
 
@@ -162,10 +162,10 @@ async def process_start_command(message: Message):
                     parts = textwrap.wrap(answer, width=4000)
                     for part in parts:
                         await message.answer(text=part)
-                        # await bot.send_message(chat_id=user_id, text=part)
+                        await bot.send_message(chat_id=user_id, text=part)
                 else:
                     await message.answer(text=answer)
-                    # await bot.send_message(chat_id=user_id, text=answer)
+                    await bot.send_message(chat_id=user_id, text=answer)
 
         except Exception as e:
             logger.error(type(e).__name__ + str(e))

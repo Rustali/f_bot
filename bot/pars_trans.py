@@ -237,7 +237,7 @@ def lets_pars_trans(name: str = None):
         time.sleep(3)
 
         # name = 'Andreas Jungdal'
-        name = 'Alexander Schlager'
+        # name = 'Alexander Schlager'
         # вводим имя игрока в поле поиска
         # print('вводим имя игрока в поле поиска')
         # print(name)
