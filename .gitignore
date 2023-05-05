@@ -4,3 +4,5 @@ venv
 __pycache__
 *.html
 *.log
+res.csv
+res_trans.csv
