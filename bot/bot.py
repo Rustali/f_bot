@@ -33,13 +33,23 @@ def check_sr(sr: dict, tr: dict):
     injury = {name: tr[name] for name in injury_names}
 
     for player in added:
-        tr_injury = lets_pars_trans(player)
+        # пробуем найти информацию об игроке на странице ТР, если при поиске возникла ошибка, то выдаем False,
+        # чтобы не прерывать цикл, и данный игрок сможеть перепроверен на следующем цикле
+        try:
+            tr_injury = lets_pars_trans(player)
+        except Exception as e:
+            tr_injury = False
         # если травма на ТР есть, то добавляем его в список травмированных
         if tr_injury:
             injury[player] = sr[player]
 
     for player in removed:
-        tr_injury = lets_pars_trans(player)
+        # пробуем найти информацию об игроке на странице ТР, если при поиске возникла ошибка, то выдаем False,
+        # чтобы не прерывать цикл, и данный игрок сможеть перепроверен на следующем цикле
+        try:
+            tr_injury = lets_pars_trans(player)
+        except Exception as e:
+            tr_injury = False
         # если травмы нет, то убираем его из списка травмированных
         if tr_injury:
             injury[player] = tr[player]
@@ -128,8 +138,21 @@ async def process_start_command(message: Message):
 
         try:
             # print('Сравниваем результат сайта СР с сайтом ТР')
-            logger.debug('Сравниваем результат сайта СР с сайтом ТР')
-            injury = check_sr(dict_new, dict_old)
+            # logger.debug('Сравниваем результат сайта СР с сайтом ТР')
+            # injury = check_sr(dict_new, dict_old)
+            logger.debug('прогоняем игроков с сайта СР на сайте ТР')
+            injury: dict = {}
+            for player in dict_new.keys():
+                # пробуем найти информацию об игроке на странице ТР, если при поиске возникла ошибка, то выдаем False,
+                # чтобы не прерывать цикл, и данный игрок сможеть перепроверен на следующем цикле
+                try:
+                    tr_injury = lets_pars_trans(player)
+                except Exception as e:
+                    logger.error(type(e).__name__ + str(e))
+                    tr_injury = False
+                # если травмы нет, то убираем его из списка травмированных
+                if tr_injury:
+                    injury[player] = dict_new[player]
         except Exception as e:
             injury = deepcopy(dict_old)
             logger.error(type(e).__name__ + str(e))
@@ -162,10 +185,10 @@ async def process_start_command(message: Message):
                     parts = textwrap.wrap(answer, width=4000)
                     for part in parts:
                         await message.answer(text=part)
-                        await bot.send_message(chat_id=user_id, text=part)
+                        # await bot.send_message(chat_id=user_id, text=part)
                 else:
                     await message.answer(text=answer)
-                    await bot.send_message(chat_id=user_id, text=answer)
+                    # await bot.send_message(chat_id=user_id, text=answer)
 
         except Exception as e:
             logger.error(type(e).__name__ + str(e))

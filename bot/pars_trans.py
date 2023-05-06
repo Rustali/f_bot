@@ -21,8 +21,8 @@ def lets_pars_trans(name: str = None):
     ua = UserAgent(browsers=['chrome'])
     user_a = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36'
 
-    s = Service(executable_path='../home/footbal_bot/chromedriver/chromedriver')
-    # s = Service(executable_path='C:\\Users\\Пользователь\\PycharmProjects\\football_bot\\chromedriver\\chromedriver.exe')
+    # s = Service(executable_path='../home/footbal_bot/chromedriver/chromedriver')
+    s = Service(executable_path='C:\\Users\\Пользователь\\PycharmProjects\\football_bot\\chromedriver\\chromedriver.exe')
     options_chrome = webdriver.ChromeOptions()
     options_chrome.add_argument(f"user-agent={ua.random}")
     options_chrome.add_argument("--disable-blink-features=AutomationControlled")
@@ -325,21 +325,21 @@ def lets_pars_trans(name: str = None):
         logger.debug('ждем прогрузки всей страницы')
         wait.until(EC.presence_of_all_elements_located((By.XPATH, "//*")))
         
-        # получаем страницу, чтобы при необходимости проверить, что она показывает
-        page = browser.execute_script("return document.documentElement.outerHTML;")
+        # # получаем страницу, чтобы при необходимости проверить, что она показывает
+        # page = browser.execute_script("return document.documentElement.outerHTML;")
 
-        # создаем имя файла на основе текущей даты и времени
-        current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-        filename = f"../bot/pages/{current_time}_{name}.html"
-        # filename = f"pages\\{current_time}_{name}.html"
+        # # создаем имя файла на основе текущей даты и времени
+        # current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        # filename = f"../bot/pages/{current_time}_{name}.html"
+        # # filename = f"pages\\{current_time}_{name}.html"
+        #
+        # # записываем страницу в файл
+        # logger.debug('записываем страницу в файл')
+        # with open(filename, 'w', encoding='utf-8') as f:
+        #     f.write(page)
 
-        # записываем страницу в файл
-        logger.debug('записываем страницу в файл')
-        with open(filename, 'w', encoding='utf-8') as f:
-            f.write(page)
-
-        # логируем сообщение в консоль
-        logger.info(f'Страница сохранена в файл: {current_time}_{name}.html')
+        # # сообщение в консоль
+        # logger.info(f'Страница сохранена в файл: {current_time}_{name}.html')
         
         # находим на странице элемент "Данные игрока", если этот элемент прогружен, значит вместе с ним должен быть прогружен элемент с травмой, если травма есть
         # print('ждем прогрузки элемента "Даные игрока"')

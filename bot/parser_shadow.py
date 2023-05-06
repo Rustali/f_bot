@@ -22,8 +22,8 @@ def lets_pars_shadow():
     user_a = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36'
     # user_a_h = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/96.0.4664.110 Safari/537.36'
 
-    s = Service(executable_path="../home/footbal_bot/chromedriver/chromedriver")
-    # s = Service(executable_path='C:\\Users\\Пользователь\\PycharmProjects\\football_bot\\chromedriver\\chromedriver.exe')
+    # s = Service(executable_path="../home/footbal_bot/chromedriver/chromedriver")
+    s = Service(executable_path='C:\\Users\\Пользователь\\PycharmProjects\\football_bot\\chromedriver\\chromedriver.exe')
     options_chrome = webdriver.ChromeOptions()
     # options_chrome.add_argument(f"user-agent={ua.random}")
     options_chrome.add_argument(f"user-agent={user_a}")
@@ -278,57 +278,79 @@ def lets_pars_shadow():
         # print('заходим на страницу с фильтрами')
         logger.debug('заходим на страницу с фильтрами')
         
-        url_f: str = env('URL_SR_F')
-        
-        browser.get(url_f)
+        # url_f: str = env('URL_SR_F')
+        #
+        # browser.get(url_f)
+        #
+        # time.sleep(10)
+        #
+        # # print('Нажимаем на вкладку Players')
+        # logger.debug('Нажимаем на вкладку Players')
+        # browser.find_element(By.XPATH, '//*[@id="root"]/div/div/div[1]/div[2]/div[2]/div/div/div[2]/div[1]/div/div[2]/div[2]/div').click()
+        # time.sleep(5)
+        #
+        # # print('Нажимаем на кнопку Gk')
+        # logger.debug('Нажимаем на кнопку Gk')
+        # # нужно прокрутить до этого элемента, чтобы он стал виден
+        # gk = browser.find_element(By.XPATH, "//p[text()='Gk']")
+        # browser.execute_script("arguments[0].click();", gk)
+        # time.sleep(5)
+        #
+        # # print('Нажимаем на кнопку For')
+        # logger.debug('Нажимаем на кнопку For')
+        # # нужно прокрутить до этого элемента, чтобы он стал виден
+        # forw = browser.find_element(By.XPATH, "//p[text()='For']")
+        # browser.execute_script("arguments[0].click();", forw)
+        # time.sleep(5)
+        #
+        # # прокручиваем страницу ниже, к кнопке Filter
+        # logger.debug('прокручиваем страницу ниже, к кнопке Filter')
+        # browser.find_element(By.XPATH, "//button[contains(text(),'Filter')]").send_keys(Keys.DOWN)
+        #
+        # time.sleep(5)
+        #
+        # # print('Выбираем Injured')
+        # logger.debug('Выбираем Injured')
+        # # Находим элемент
+        # element_injured = browser.find_element(By.CSS_SELECTOR, 'input.select-search__input[placeholder="Filter by availability status"]')
+        #
+        # time.sleep(5)
+        #
+        # element_injured.click()
+        # time.sleep(5)
+        # element_injured.send_keys(Keys.DOWN)
+        # element_injured.send_keys(Keys.DOWN)
+        # element_injured.send_keys(Keys.DOWN)
+        # element_injured.send_keys(Keys.RETURN)
+        #
+        # time.sleep(5)
+        #
+        # # print('Нажимаем на кнопку Filter')
+        # logger.debug('Нажимаем на кнопку Filter')
+        # element_filter = browser.find_element(By.XPATH, "//button[contains(text(),'Filter')]")
+        # browser.execute_script("arguments[0].click();", element_filter)
+
+        # ниже кода для фильтра на странице рейтинга
+
+        # print('заходим на страницу с фильтрами')
+        url_r: str = env('URL_SR_R')
+
+        browser.get(url_r)
 
         time.sleep(10)
 
-        # print('Нажимаем на вкладку Players')
-        logger.debug('Нажимаем на вкладку Players')
-        browser.find_element(By.XPATH, '//*[@id="root"]/div/div/div[1]/div[2]/div[2]/div/div/div[2]/div[1]/div/div[2]/div[2]/div').click()
-        time.sleep(5)
-
         # print('Нажимаем на кнопку Gk')
         logger.debug('Нажимаем на кнопку Gk')
-        # нужно прокрутить до этого элемента, чтобы он стал виден
         gk = browser.find_element(By.XPATH, "//p[text()='Gk']")
         browser.execute_script("arguments[0].click();", gk)
-        time.sleep(5)
-
-        # print('Нажимаем на кнопку For')
-        logger.debug('Нажимаем на кнопку For')
-        # нужно прокрутить до этого элемента, чтобы он стал виден
-        forw = browser.find_element(By.XPATH, "//p[text()='For']")
-        browser.execute_script("arguments[0].click();", forw)
-        time.sleep(5)
-
-        # прокручиваем страницу ниже, к кнопке Filter
-        logger.debug('прокручиваем страницу ниже, к кнопке Filter')
-        browser.find_element(By.XPATH, "//button[contains(text(),'Filter')]").send_keys(Keys.DOWN)
-        
-        time.sleep(5)
-        
-        # print('Выбираем Injured')
-        logger.debug('Выбираем Injured')
-        # Находим элемент
-        element_injured = browser.find_element(By.CSS_SELECTOR, 'input.select-search__input[placeholder="Filter by availability status"]')
-
-        time.sleep(5)
-
-        element_injured.click()
-        time.sleep(5)
-        element_injured.send_keys(Keys.DOWN)
-        element_injured.send_keys(Keys.DOWN)
-        element_injured.send_keys(Keys.DOWN)
-        element_injured.send_keys(Keys.RETURN)
-
-        time.sleep(5)
+        time.sleep(3)
 
         # print('Нажимаем на кнопку Filter')
         logger.debug('Нажимаем на кнопку Filter')
         element_filter = browser.find_element(By.XPATH, "//button[contains(text(),'Filter')]")
         browser.execute_script("arguments[0].click();", element_filter)
+
+        time.sleep(3)
 
         # ждем, пока загрузится нужный элемент
         wait = WebDriverWait(browser, 30)
@@ -363,7 +385,8 @@ def lets_pars_shadow():
             #     break
             
             # если количество игроков на странице не изменилось, выходим из цикла
-            if len(players) == prev_num_players and len(players) > 75:
+            # if len(players) == prev_num_players and len(players) > 75:
+            if len(players) == prev_num_players and len(players) > 50:
                 break
 
             # обновляем количество игроков
@@ -385,7 +408,8 @@ def lets_pars_shadow():
         # print('заполняем списки с именами и ссылками')
         logger.debug('заполняем списки с именами и ссылками')
         for link in links:
-            name = link.text
+            # name = link.text
+            name = link.find_element(By.CLASS_NAME, 'font-semibold').text
             player_link = link.get_attribute('href')
             names.append(name)
             player_links.append(player_link)
