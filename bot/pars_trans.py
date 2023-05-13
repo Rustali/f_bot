@@ -21,8 +21,8 @@ def lets_pars_trans(name: str = None):
     ua = UserAgent(browsers=['chrome'])
     user_a = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36'
 
-    # s = Service(executable_path='../home/footbal_bot/chromedriver/chromedriver')
-    s = Service(executable_path='C:\\Users\\Пользователь\\PycharmProjects\\football_bot\\chromedriver\\chromedriver.exe')
+    s = Service(executable_path='../home/f_bot/chromedriver/chromedriver')
+    # s = Service(executable_path='C:\\Users\\Пользователь\\PycharmProjects\\football_bot\\chromedriver\\chromedriver.exe')
     options_chrome = webdriver.ChromeOptions()
     options_chrome.add_argument(f"user-agent={ua.random}")
     options_chrome.add_argument("--disable-blink-features=AutomationControlled")
@@ -283,17 +283,26 @@ def lets_pars_trans(name: str = None):
         time.sleep(2)
         
         # если есть результаты поиска, то находим все строчки с результатом
+        logger.debug('ждем прогрузки всей страницы')
+        wait.until(EC.presence_of_all_elements_located((By.XPATH, "//*")))
+        
         logger.debug('если есть результаты поиска, то находим все строчки с результатом')
-        try:
-            elements = WebDriverWait(browser, 40).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".odd, .even")))
-        except Exception as e:
+        # try:
+        #     elements = WebDriverWait(browser, 40).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".odd, .even")))
+        # except Exception as e:
+        #     logger.debug('результатов поиска нет')
+        #     return False
+        elements = browser.find_elements(By.CSS_SELECTOR, ".odd, .even")
+
+        if len(elements) == 0:
             logger.debug('результатов поиска нет')
+            logger.debug(name)
             return False
 
         # print(name)
         # print(len(elements))
         logger.debug(name)
-        logger.debug(len(elements))
+        logger.debug(f'результатов поиска {len(elements)} штук')
 
         # print('находим нужное амплуа')
         logger.debug('находим нужное амплуа')
@@ -312,11 +321,12 @@ def lets_pars_trans(name: str = None):
                 # print('нажали на ссылку')
                 need_amplua = True
                 # print('Прерываем цикл')
-                logger.debug('Прерываем цикл')
+                # logger.debug('Прерываем цикл')
                 break
         
         # print('check need_amplua')
         if not need_amplua:
+            logger.debug('Нужное амплуа не наидено, возвращаем False')
             return False
 
 

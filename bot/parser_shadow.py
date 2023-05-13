@@ -22,8 +22,8 @@ def lets_pars_shadow():
     user_a = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36'
     # user_a_h = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/96.0.4664.110 Safari/537.36'
 
-    # s = Service(executable_path="../home/footbal_bot/chromedriver/chromedriver")
-    s = Service(executable_path='C:\\Users\\Пользователь\\PycharmProjects\\football_bot\\chromedriver\\chromedriver.exe')
+    s = Service(executable_path="../home/f_bot/chromedriver/chromedriver")
+    # s = Service(executable_path='C:\\Users\\Пользователь\\PycharmProjects\\football_bot\\chromedriver\\chromedriver.exe')
     options_chrome = webdriver.ChromeOptions()
     # options_chrome.add_argument(f"user-agent={ua.random}")
     options_chrome.add_argument(f"user-agent={user_a}")
