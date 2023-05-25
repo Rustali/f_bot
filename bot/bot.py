@@ -165,11 +165,21 @@ async def process_start_command(message: Message):
             for player in dict_new.keys():
                 # пробуем найти информацию об игроке на странице ТР, если при поиске возникла ошибка, то выдаем False,
                 # чтобы не прерывать цикл, и данный игрок сможеть перепроверен на следующем цикле
-                try:
-                    tr_injury = lets_pars_trans(player)
-                except Exception as e:
-                    logger.error(type(e).__name__ + str(e))
-                    tr_injury = False
+                # try:
+                #     tr_injury = lets_pars_trans(player)
+                # except Exception as e:
+                #     logger.error(type(e).__name__ + str(e))
+                #     tr_injury = False
+                
+                # пробуем снова найти информацию об игроке (ошибка возникнет только если страница не прогрузиться как надо)
+                while True:
+                    try:
+                        tr_injury = lets_pars_trans(player)
+                        break
+                    except Exception as e:
+                        logger.error(type(e).__name__ + str(e))
+                        pass
+                
                 # если травмы нет, то убираем его из списка травмированных
                 if tr_injury:
                     injury[player] = dict_new[player]
